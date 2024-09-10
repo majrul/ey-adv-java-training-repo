@@ -1,6 +1,8 @@
 package com.ey.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,17 +17,23 @@ import com.ey.service.LoginService;
 @WebServlet("/loginCheck")
 public class LoginServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("uname");
 		String password = request.getParameter("pwd");
 		
 		LoginService loginService = new LoginService();
 		boolean isValid = loginService.isValidUser(username, password);
 		
+		PrintWriter out = response.getWriter();
 		if(isValid)
+			out.write("<h2>Okay</h2>");
+		else
+			out.write("<h2>Not Okay</h2>");
+		
+		/*if(isValid)
 			response.sendRedirect("welcome.html?uname="+username);
 		else
-			response.sendRedirect("login.html?error=1");
+			response.sendRedirect("login.html?error=1");*/
 	}
 
 }
