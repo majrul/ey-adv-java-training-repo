@@ -23,9 +23,9 @@ public class LoginServlet extends HttpServlet {
 		boolean isValid = loginService.isValidUser(username, password);
 		
 		if(isValid)
-			response.sendRedirect("welcome.html");
+			response.sendRedirect("welcome.html?uname="+username);
 		else
-			response.sendRedirect("login.html");
+			response.sendRedirect("login.html?error=1");
 	}
 
 }

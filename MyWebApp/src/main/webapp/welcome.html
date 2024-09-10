@@ -5,6 +5,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome back</h1>
+<h1 id="msg"></h1>
+<script>
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+var uname = getParameterByName("uname");
+document.getElementById("msg").innerHTML = "Welcome back " + uname;
+</script>
 </body>
 </html>

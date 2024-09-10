@@ -5,11 +5,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="msg"></div>
 <form action="loginCheck">
 Enter username : <input type="text" name="uname" /> <br />
 Enter password : <input type="password" name="pwd" /> <br />
 Remember Me : <input type="checkbox" name="remember" value="y" /> <br />
 <button type="submit">Login</button>
 </form>
+<script>
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+var error = getParameterByName("error");
+if(error == 1)
+	document.getElementById("msg").innerHTML = "<b>Invalid Username/Password</b>";
+</script>
 </body>
 </html>
