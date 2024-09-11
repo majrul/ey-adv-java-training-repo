@@ -3,10 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+const getCookieValue = (name) => (
+		  document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+)
+
+function check() {
+	var page = "login.html";
+	var loginData = getCookieValue("loginData");
+	if(loginData != undefined) {
+		loginData = atob(loginData);
+		var username = loginData.split(":")[0];
+		var password = loginData.split(":")[1];
+		console.log(username, password);
+		//there has to be an api call here to verify the details
+		if(username && password) {
+			page = "welcome.html?uname="+username;
+		}	
+	}
+	document.getElementById("mylink").href = page;
+}
+</script>
 </head>
-<body>
+<body onload="check()">
 <h1>Welcome to my website!</h1>
 <a href="hello">My first servlet program</a> <br />
-<a href="login.html">Login example</a>
+<a id="mylink">Click here to continue</a>
 </body>
 </html>
