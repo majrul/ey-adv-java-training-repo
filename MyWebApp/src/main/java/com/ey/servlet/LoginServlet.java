@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ey.service.DatabaseLoginService;
 import com.ey.service.LoginService;
 
 /**
@@ -21,19 +22,18 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("uname");
 		String password = request.getParameter("pwd");
 		
-		LoginService loginService = new LoginService();
+		LoginService loginService = new DatabaseLoginService();
 		boolean isValid = loginService.isValidUser(username, password);
 		
-		PrintWriter out = response.getWriter();
+		/*PrintWriter out = response.getWriter();
 		if(isValid)
 			out.write("<h2>Okay</h2>");
-		else
-			out.write("<h2>Not Okay</h2>");
+		else*/
 		
-		/*if(isValid)
+		if(isValid)
 			response.sendRedirect("welcome.html?uname="+username);
 		else
-			response.sendRedirect("login.html?error=1");*/
+			response.sendRedirect("login.html?error=1");
 	}
 
 }
