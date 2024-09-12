@@ -30,6 +30,9 @@ public class QuestionLoaderServlet extends HttpServlet {
 		if(qNo < questions.size()) {		
 			Question question = questions.get(qNo++);
 			
+			session.setAttribute("qNo", qNo);
+			session.setAttribute("totalQs", questions.size());
+			
 			session.setAttribute("question", question);
 			
 			response.sendRedirect("showQuestion.jsp");

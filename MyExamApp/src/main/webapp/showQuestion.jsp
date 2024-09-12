@@ -12,10 +12,16 @@
 <body>
 <form action="CalculateScoreServlet">
 <%
+Integer qNo = (Integer) session.getAttribute("qNo");
 Question question = (Question) session.getAttribute("question");
 List<Option> options = question.getOptions();
 %>
-<h1><%= question.getText() %></h1>
+
+<h1>
+	Question No. <%= qNo %><br />
+	<%= question.getText() %>
+</h1>
+
 <%
 int opNo = 0;
 for(Option option : options) {
