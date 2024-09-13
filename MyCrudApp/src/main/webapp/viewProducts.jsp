@@ -17,6 +17,7 @@ for(Product product : list) {
 	Name : <%= product.getName() %> <br />
 	Price : <%= product.getPrice() %> <br />
 	Quantity : <%= product.getQuantity() %> <br />
+	<a href="">Edit</a> | <a href="ProductServlet?op=delete&id=<%= product.getId() %>">Delete</a>
 	<hr />
 <%
 }

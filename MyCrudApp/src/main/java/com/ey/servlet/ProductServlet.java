@@ -21,12 +21,23 @@ public class ProductServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductDao dao = new ProductDao();
-		List<Product> list = dao.fetchAll();
+
+		String op = request.getParameter("op");
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("listOfProducts", list);
+		if(op.equals("fetchAll")) {
+			List<Product> list = dao.fetchAll();
 		
-		response.sendRedirect("viewProducts.jsp");
+			HttpSession session = request.getSession();
+			session.setAttribute("listOfProducts", list);
+		
+			response.sendRedirect("viewProducts.jsp");
+		}
+		else if(op.equals("delete")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			dao.delete(id);
+			//response.sendRedirect("viewProducts.jsp");
+			response.sendRedirect("ProductServlet?op=fetchAll");
+		}
 	}
 
 }

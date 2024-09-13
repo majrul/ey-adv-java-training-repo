@@ -46,4 +46,22 @@ public class ProductDao {
 			try { conn.close(); } catch(Exception e) { }
 		}
 	}
+	
+	public void delete(int id) {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/training", "root", "passw0rd");
+			String sql = "delete from product where id = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, id);
+			st.executeUpdate();			
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try { conn.close(); } catch(Exception e) { }
+		}
+	}
 }
