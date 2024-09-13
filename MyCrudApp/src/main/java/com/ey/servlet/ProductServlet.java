@@ -21,13 +21,13 @@ public class ProductServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductDao dao = new ProductDao();
+		HttpSession session = request.getSession();
 
 		String op = request.getParameter("op");
 		
 		if(op.equals("fetchAll")) {
 			List<Product> list = dao.fetchAll();
 		
-			HttpSession session = request.getSession();
 			session.setAttribute("listOfProducts", list);
 		
 			response.sendRedirect("viewProducts.jsp");
@@ -43,6 +43,28 @@ public class ProductServlet extends HttpServlet {
 			product.setQuantity(quantity);
 			
 			dao.add(product);
+			
+			response.sendRedirect("ProductServlet?op=fetchAll");
+		}
+		else if(op.equals("edit")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			Product product = dao.fetchOne(id);
+			session.setAttribute("product", product);
+			response.sendRedirect("editProduct.jsp");
+		}
+		else if(op.equals("update")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			String name = request.getParameter("name");
+			double price = Double.parseDouble(request.getParameter("price"));
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
+			
+			Product product = new Product();
+			product.setId(id);
+			product.setName(name);
+			product.setPrice(price);
+			product.setQuantity(quantity);
+			
+			dao.update(product);
 			
 			response.sendRedirect("ProductServlet?op=fetchAll");
 		}

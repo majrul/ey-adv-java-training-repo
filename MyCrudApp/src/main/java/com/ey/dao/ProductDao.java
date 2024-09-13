@@ -36,7 +36,58 @@ public class ProductDao {
 			try { conn.close(); } catch(Exception e) { }
 		}
 	}
-	
+
+	public void update(Product product) {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/training", "root", "passw0rd");
+			String sql = "update product set name = ?, price = ?, quantity = ? where id = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, product.getName());
+			st.setDouble(2, product.getPrice());
+			st.setInt(3, product.getQuantity());
+			st.setInt(4, product.getId());
+			st.executeUpdate();			
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try { conn.close(); } catch(Exception e) { }
+		}
+	}
+
+	public Product fetchOne(int id) {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/training", "root", "passw0rd");
+			String sql = "select * from product where id = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, id);
+			ResultSet rs = st.executeQuery();
+			
+			if(rs.next()) {
+				Product product = new Product();
+				product.setId(rs.getInt("id"));
+				product.setName(rs.getString("name"));
+				product.setPrice(rs.getDouble("price"));
+				product.setQuantity(rs.getInt("quantity"));
+				return product;
+			}
+			return null; //bad, rather we should throw an user defined exception
+			
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return null; //bad, rather we should throw an user defined exception
+		}
+		finally {
+			try { conn.close(); } catch(Exception e) { }
+		}
+	}
+
 	public List<Product> fetchAll() {
 		Connection conn = null;
 		try {
