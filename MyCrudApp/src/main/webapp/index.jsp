@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="ProductServlet?op=fetchAll">View Products</a>
+<a href="ProductServlet?op=fetchAll">View Products</a> |
+<a href="addProduct.jsp">Add Product</a>
 </body>
 </html>

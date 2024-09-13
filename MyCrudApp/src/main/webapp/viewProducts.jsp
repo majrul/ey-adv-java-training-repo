@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="addProduct.jsp">Add Product</a>
+<br />
 <%
 List<Product> list = (List<Product>) session.getAttribute("listOfProducts");
 for(Product product : list) {

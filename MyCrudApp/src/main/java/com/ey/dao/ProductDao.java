@@ -17,6 +17,26 @@ import com.ey.entity.Product;
 //insert into product(name, price, quantity) values('iPhone 15', 69000, 25);
 public class ProductDao {
 
+	public void add(Product product) {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/training", "root", "passw0rd");
+			String sql = "insert into product(name, price, quantity) values(?,?,?)";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, product.getName());
+			st.setDouble(2, product.getPrice());
+			st.setInt(3, product.getQuantity());
+			st.executeUpdate();			
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try { conn.close(); } catch(Exception e) { }
+		}
+	}
+	
 	public List<Product> fetchAll() {
 		Connection conn = null;
 		try {

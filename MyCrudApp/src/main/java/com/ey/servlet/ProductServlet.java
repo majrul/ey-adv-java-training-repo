@@ -32,6 +32,20 @@ public class ProductServlet extends HttpServlet {
 		
 			response.sendRedirect("viewProducts.jsp");
 		}
+		else if(op.equals("add")) {
+			String name = request.getParameter("name");
+			double price = Double.parseDouble(request.getParameter("price"));
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
+			
+			Product product = new Product();
+			product.setName(name);
+			product.setPrice(price);
+			product.setQuantity(quantity);
+			
+			dao.add(product);
+			
+			response.sendRedirect("ProductServlet?op=fetchAll");
+		}
 		else if(op.equals("delete")) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			dao.delete(id);
