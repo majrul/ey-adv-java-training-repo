@@ -27,12 +27,16 @@ public class PnrResource {
 	
 	//URI: http://localhost:8080/MyRestApp/api/pnr-status/11111111
 	/*@GET
-	@Path("/{pnrNo}/{userId}")
+	@Path("/{pnrNo}")
 	public Pnr getStatus(@PathParam("pnrNo") int pnrNo) {*/
 	
 	//URI: http://localhost:8080/MyRestApp/api/pnr-status;pnrNo=1111111111
+	//@GET
+	//public Pnr getStatus(@MatrixParam("pnrNo") int pnrNo) {
+	
 	@GET
-	public Pnr getStatus(@MatrixParam("pnrNo") int pnrNo) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Pnr getStatus(@QueryParam("pnrNo") int pnrNo) {
 		//for the time being we will hardcode some data
 		Pnr pnr = new Pnr();
 		pnr.setPnrNo(pnrNo);
