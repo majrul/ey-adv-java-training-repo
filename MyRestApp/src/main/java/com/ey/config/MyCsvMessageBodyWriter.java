@@ -1,4 +1,4 @@
-package com.ey.api;
+package com.ey.config;
 
 import java.io.IOException;
 import java.io.OutputStream;
