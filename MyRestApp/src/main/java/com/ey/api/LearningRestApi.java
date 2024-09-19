@@ -169,4 +169,44 @@ public class LearningRestApi {
 				.header("app-key", "ABCD12345")
 				.build();
 	}
+	
+	@GET
+	@Path("/11/{id}")
+	@Produces("text/csv")
+	public Trade get(@PathParam("id") int id) {
+		TradeDao dao = new TradeDao();
+		Trade trade = dao.fetch(id);
+		return trade;
+	}
+	
+	//localhost:8080/MyRestApp/api/example/12/12345.csv
+	//localhost:8080/MyRestApp/api/example/12/12345.json
+	//localhost:8080/MyRestApp/api/example/12/12345.xml
+	@GET
+	@Path("/12/{id}.{format}")
+	public Response getV2(@PathParam("id") int id, @PathParam("format") String format) {
+		TradeDao dao = new TradeDao();
+		Trade trade = dao.fetch(id);
+		
+		if(format.equals("xml"))
+			return Response
+					.ok()
+					.entity(trade)
+					.type(MediaType.APPLICATION_XML)
+					.build();
+		else if(format.equals("csv"))
+			return Response
+					.ok()
+					.entity(trade)
+					.type("text/csv")
+					.build();
+		else
+			return Response
+					.ok()
+					.entity(trade)
+					.type(MediaType.APPLICATION_JSON)
+					.build();
+
+	}
+
 }
