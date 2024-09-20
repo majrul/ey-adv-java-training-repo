@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ey.entity.Product;
+import com.ey.excepion.ProductException;
 
 //Data Access Object
 //Any java class talking to the db is commonly referred to as Dao class
@@ -76,12 +77,13 @@ public class ProductDao {
 				product.setQuantity(rs.getInt("quantity"));
 				return product;
 			}
-			return null; //bad, rather we should throw an user defined exception
-			
+			//return null; //bad, rather we should throw an user defined exception
+			throw new ProductException("No product with id " + id);
 		}
 		catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			return null; //bad, rather we should throw an user defined exception
+			//return null; //bad, rather we should throw an user defined exception
+			throw new ProductException("Error while fetching product by id", e);
 		}
 		finally {
 			try { conn.close(); } catch(Exception e) { }
