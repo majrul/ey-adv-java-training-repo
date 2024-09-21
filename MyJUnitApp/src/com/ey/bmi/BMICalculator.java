@@ -1,5 +1,8 @@
 package com.ey.bmi;
 
+import java.util.Comparator;
+import java.util.List;
+
 public class BMICalculator implements BMI {
 
 	@Override
@@ -21,5 +24,22 @@ public class BMICalculator implements BMI {
 			return false;
 		else
 			return true;
+	}
+	
+	@Override
+	public double[] getBMIValues(List<Person> persons) {
+		return persons
+				.stream()
+				.mapToDouble(this::calculateBMI)
+				.toArray();
+	}
+	
+	@Override
+	public Person findPersonWithLowestBMI(List<Person> persons) {
+		return persons
+				.stream()
+				.sorted(Comparator.comparing(this::calculateBMI))
+				.reduce((first, second) -> first)
+				.orElseThrow(BMIException::new);
 	}
 }
