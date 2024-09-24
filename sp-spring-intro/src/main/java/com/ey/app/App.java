@@ -6,8 +6,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ey.config.MySpringConfig;
 import com.ey.demo.Calculator;
+import com.ey.demo.CurrencyConverter;
 import com.ey.demo.HelloWorld;
 import com.ey.demo.LoginService;
+import com.ey.demo.TextEditor;
 
 public class App {
 
@@ -25,6 +27,12 @@ public class App {
 		
 		LoginService loginService = (LoginService) ctx.getBean("loginServ");
 		System.out.println(loginService.isValidUser("majrul", "456"));
+		
+		CurrencyConverter cc = (CurrencyConverter) ctx.getBean("currConv");
+		System.out.println(cc.convert("USD", "INR", 75));
+		
+		TextEditor te = (TextEditor) ctx.getBean("txtEdtr");
+		te.load("abc.txt");
 		
 		//Why are are not creating object of HelloWorld class?
 		//HelloWorld h = new HelloWorld();
