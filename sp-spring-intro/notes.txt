@@ -1,0 +1,55 @@
+Spring Framework
+
+- Dependency Injection (DI)
+  - Creating objects
+     Option 1
+     --------
+     For ex:
+     class HelloWorld {
+       ...
+     }
+     Next we need to write an xml file with the
+     following entry:
+     <bean id="hello" class="com.ey.demo.HelloWorld" />
+
+     Option 2
+     --------
+     We will use annotations     
+     For ex:
+     @Component("hello")
+     class HelloWorld {
+       ...
+     }
+     Still we had to do an entry in the xml file:
+     <context:component-scan base-package="com.ey.demo" />
+
+    Option 3
+    --------
+    We remove the xml file and replace it with 
+    java based configuration
+    @Configuration
+    @ComponentScan("com.ey.demo")
+    public class MySpringConfig {
+
+	@Bean
+	public HelloWorld hello() {
+		return new HelloWorld();
+	}
+    }
+
+    This approach is best when our classes 
+    are annotated	
+
+    
+
+  - Managing dependencies between objects
+
+
+
+
+class Emp {
+
+}
+
+
+Emp e = new Emp(); //why spring when i can create an object easily in java
