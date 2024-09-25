@@ -43,13 +43,19 @@ Spring Framework
     
 
   - Managing dependencies between objects
-
-
-
-
-class Emp {
-
-}
-
-
-Emp e = new Emp(); //why spring when i can create an object easily in java
+	-	achieved using @Autowired annotation
+	for ex:
+	@Component
+	class Car {
+	
+		@Autowired
+		Engine engine;
+		
+		...
+	}
+	
+	@Component
+	class Engine {
+	
+		...
+	}
