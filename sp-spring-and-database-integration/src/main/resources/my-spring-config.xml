@@ -8,5 +8,16 @@
 
  	<!-- loading annotation beans -->
 	<context:component-scan base-package="com.ey.demo" />
+	
+	<!-- DataSource configuration -->
+	<!-- This bean doesn't really do connection pooling, it still opens connection on demand -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" init-method="createDataSource">
+	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+	    <property name="url" value="jdbc:mysql://localhost:3306/training" />
+	    <property name="username" value="root" />
+	    <property name="password" value="root" />
+	    <property name="initialSize" value="2" />
+	</bean>
 		
 </beans>

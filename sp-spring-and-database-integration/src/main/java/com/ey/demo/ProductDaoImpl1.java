@@ -5,29 +5,35 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-@Component("daoImp1")
+@Component("daoImpl1")
 public class ProductDaoImpl1 implements ProductDao {
 
 	@Override
-	public void add(Product product) {
+	public int add(Product product) {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/training", "root", "root");
 			String sql = "insert into product(name, price, quantity) values(?,?,?)";
-			PreparedStatement st = conn.prepareStatement(sql);
+			PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, product.getName());
 			st.setDouble(2, product.getPrice());
 			st.setInt(3, product.getQuantity());
 			st.executeUpdate();			
+			
+			ResultSet rs = st.getGeneratedKeys();
+			rs.next();
+			return rs.getInt(1);
 		}
 		catch(ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			e.printStackTrace(); //throw an exception instead
+			return -1;
 		}
 		finally {
 			try { conn.close(); } catch(Exception e) { }
@@ -92,7 +98,11 @@ public class ProductDaoImpl1 implements ProductDao {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
+			//long ms1 = System.currentTimeMillis();
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/training", "root", "root");
+			//long ms2 = System.currentTimeMillis();
+			//System.out.println("approx time to connect " + (ms2 - ms1) + " ms");
+
 			String sql = "select * from product";
 			PreparedStatement st = conn.prepareStatement(sql);
 			ResultSet rs = st.executeQuery();
@@ -107,7 +117,6 @@ public class ProductDaoImpl1 implements ProductDao {
 				list.add(product);
 			}
 			return list;
-			
 		}
 		catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
