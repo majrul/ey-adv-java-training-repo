@@ -55,6 +55,12 @@
 	</bean>
 	
 	<tx:annotation-driven />
+
+	<!-- Setting required for enabling support for Spring Data JPA.
+		What we are basically doing is telling Spring to scan this package
+		and search for any interface which is extending CrudRepository/JpaRepository
+		and if found, go and implement the same and keep it ready -->
+	<jpa:repositories base-package="com.ey.demo" entity-manager-factory-ref="myEmf" />
 	
 		
 </beans>
