@@ -23,7 +23,7 @@ class ProductTest {
 	@BeforeAll
 	static void init() {
 		ctx = new ClassPathXmlApplicationContext("my-spring-config.xml");
-		dao = (ProductDao) ctx.getBean("daoImpl3a");		
+		dao = (ProductDao) ctx.getBean("daoImpl4");		
 	}
 	
 	@AfterAll
