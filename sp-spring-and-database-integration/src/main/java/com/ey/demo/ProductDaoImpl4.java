@@ -25,25 +25,26 @@ public class ProductDaoImpl4 implements ProductDao {
 	public int add(Product product) {
 		entityManager.persist(product); //persist will generate insert query
 		return product.getId();
-	}
+	} //merge can be used instead of persist method
 
 	@Override
 	public void update(Product product) {
-
+		entityManager.merge(product); //merge will generate update query
 	}
 
 	@Override
 	public Product fetchOne(int id) {
-		return null;
+		return entityManager.find(Product.class, id); //find will generate select query with where pk = ?
 	}
 
 	@Override
 	public List<Product> fetchAll() {
-		return null;
+		return entityManager.createQuery("select p from Product p", Product.class).getResultList(); //HQL/JPQL
 	}
 	
 	@Override
 	public void delete(int id) {
-
+		Product p = entityManager.find(Product.class, id);
+		entityManager.remove(p); //remove will generate delete query
 	}
 }

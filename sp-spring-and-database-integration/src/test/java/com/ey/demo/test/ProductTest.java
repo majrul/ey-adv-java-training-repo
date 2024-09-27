@@ -42,8 +42,22 @@ class ProductTest {
 		assertTrue(id > 0);
 	}
 
-	//@Test
-	@RepeatedTest(5)
+	@Test
+	void updateProduct() {
+		Product p = dao.fetchOne(1);
+		p.setPrice(p.getPrice() - p.getPrice() * 0.10);
+		dao.update(p);
+		//TODO: add the required assert statement
+	}
+	
+	@Test
+	void deleteProduct() {
+		dao.delete(1);
+		//TODO: add the required assert statement
+	}
+	
+	@Test
+	//@RepeatedTest(5)
 	void fetchProducts() {
 		long ms1 = System.currentTimeMillis();
 		List<Product> list = dao.fetchAll();
