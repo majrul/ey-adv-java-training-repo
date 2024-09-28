@@ -11,6 +11,5 @@ Empno : ${ emp.empno } <br />
 Name : ${ emp.name } <br />
 Salary : ${ emp.salary } <br />
 Date of Joining : ${ emp.dateOfJoining } <br />
-</form>
 </body>
 </html>
