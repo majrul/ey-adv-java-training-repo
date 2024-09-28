@@ -26,7 +26,7 @@ public class EmployeeRestController {
 	@PostMapping("/add")
 	public String add(@RequestBody Employee emp) {
 		employeeRepository.save(emp);
-		return "Employee added successfully!";
+		return "Employee with empno " + emp.getEmpno() + " added successfully!";
 	}
 	
 	@GetMapping("/all")
