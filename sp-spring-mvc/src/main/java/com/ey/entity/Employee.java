@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tbl_emp")
 public class Employee {
@@ -21,6 +23,7 @@ public class Employee {
 	private String name;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfJoining;
 	
 	private double salary;
