@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductDaoImpl4 implements ProductDao {
 
 	//@Autowired doesn't works in case of injecting EntityManager object
-	@PersistenceContext
+	@PersistenceContext()
 	private EntityManager entityManager;
 	
 	
