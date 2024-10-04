@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.entity.Product;
 import com.training.service.ProductCompositeService;
+import com.training.service.ProductCompositeService2;
 
 @RestController
 public class ProductCompositeController {
 
 	@Autowired
-	private ProductCompositeService productCompositeService;
+	private ProductCompositeService2 productCompositeService;
 	
 	@GetMapping("/product-info/{productId}")
 	public Product getProductInfo(@PathVariable int productId) {
