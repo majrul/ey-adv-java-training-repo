@@ -8,6 +8,8 @@ public class Product {
 	private String name;
 	private double price;
 	
+	private String serviceAddress;
+	
 	private List<Rating> ratings;
 
 	public int getId() {
@@ -42,5 +44,10 @@ public class Product {
 		this.ratings = ratings;
 	}
 	
-	
+	public String getServiceAddress() {
+		return serviceAddress;
+	}
+	public void setServiceAddress(String serviceAddress) {
+		this.serviceAddress = serviceAddress;
+	}
 }

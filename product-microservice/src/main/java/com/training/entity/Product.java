@@ -16,6 +16,8 @@ public class Product {
 	
 	private String name;
 	private double price;
+
+	private String serviceAddress;
 	
 	public int getId() {
 		return id;
@@ -36,4 +38,10 @@ public class Product {
 		this.price = price;
 	}
 	
+	public String getServiceAddress() {
+		return serviceAddress;
+	}
+	public void setServiceAddress(String serviceAddress) {
+		this.serviceAddress = serviceAddress;
+	}
 }
