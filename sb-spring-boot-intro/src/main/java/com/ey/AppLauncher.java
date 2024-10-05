@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class AppLauncher {
 
 	public static void main(String[] args) {
+		//System.setProperty("spring.profiles.active", "prod");
 		SpringApplication.run(AppLauncher.class, args);
 	}
 
